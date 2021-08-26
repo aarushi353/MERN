@@ -1,9 +1,8 @@
-import React from 'react'
-
+import React from "react";
+import MyParagraph from "./MyParagraph";
 const DemoOutput = (props) => {
-    return (
-        <p>{props.show ? 'This is it':''}</p>
-    )
-}
+  return <MyParagraph>{props.show ? "This is it" : ""}</MyParagraph>;
+};
 
-export default DemoOutput
+export default React.memo(DemoOutput);
+//If props value doesn'y change, component evaluation skips. Hence, save time :)

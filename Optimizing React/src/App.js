@@ -1,21 +1,29 @@
-import React,{useState} from 'react';
+import React, { useState, useCallback } from "react";
 import Button from "../src/components/UI/Button/Button";
-import DemoOutput from './components/demo/DemoOutput';
-import './App.css';
+import DemoOutput from "./components/demo/DemoOutput";
+import "./App.css";
 
 function App() {
   const [showParagraph, setShowParagraph] = useState(false);
-  console.log('APP RUNNING')
-  const toggleParagraphHandler = () => {
-  setShowParagraph((prevShowParagraph) => !prevShowParagraph);
+  const [allowToggle, setAllowToggle] = useState(false);
+  console.log("APP RUNNING");
+  const toggleParagraphHandler = useCallback(() => {
+    if (allowToggle) {
+      setShowParagraph((prevShowParagraph) => !prevShowParagraph);
+    }
+  }, [allowToggle]);
+  const allowToggleHandler = () => {
+    setAllowToggle(true);
   };
   return (
     <div className="app">
       <h1>Hi there!</h1>
       <DemoOutput show={showParagraph} />
+      <Button onClick={allowToggleHandler}>Allow Toggling</Button>
       <Button onClick={toggleParagraphHandler}>Show Paragraph!</Button>
     </div>
   );
 }
 
 export default App;
+// re running and re evaluating isn't same
